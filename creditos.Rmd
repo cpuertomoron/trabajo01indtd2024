@@ -1,0 +1,8 @@
+---
+title: "creditos"
+output: html_document
+---
+
+Trabajo 01 - Teoría de la Decisión 
+Versión final del repositorio
+Autor: [Carmen Puerto Morón]
