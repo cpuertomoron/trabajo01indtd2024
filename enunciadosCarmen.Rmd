@@ -1,5 +1,34 @@
 ---
-title: "enunciadosCarmen"
-output: html_document
+title: "Enunciados trabajo individual 01"
+author: "Carmen Puerto Moron"
+output:
+  html_document: default
+  pdf_document: default
 ---
 
+## Ejercicio 1
+
+Un departamento universitario debe decidir qué modalidad de examen aplicar en una asignatura. La efectividad de cada decisión dependerá del nivel de preparación del alumnado ese año.
+
+| **Estrategia (D)** | **E1 (Alumnos muy preparados)** | **E2 (Preparación media)** | **E3 (Preparación baja)** |
+|:----------------|:---------------------------:|:-----------------------:|:---------------------:|
+| **D1 – Examen tipo test** | 9 | 7 | 4 |
+| **D2 – Examen de desarrollo** | 8 | 6 | 5 |
+| **D3 – Examen mixto (test + desarrollo)** | 8 | 7 | 6 |
+| **D4 – Trabajo práctico en grupo** | 6 | 8 | 7 |
+
+Los valores representan la media esperada de calificaciones sobre 10.
+
+
+
+## EJERCICIO 2
+
+Una persona está planificando sus vacaciones de verano. Debe elegir entre tres destinos y sabe que el disfrute del viaje dependerá del clima durante esas fechas.
+
+| **Alternativa (D)** | **E1 (Clima soleado)** | **E2 (Clima variable)** | E3 **(Clima lluvioso)** |
+|:-----------------|:------------------:|:-------------------:|:-------------------:|
+| **D1 – Playa** | 9 | 6 | 2 |
+| **D2 – Ciudad cultural** | 7 | 8 | 5 |
+| **D3 – Turismo rural** | 6 | 7 | 8 |
+
+Los valores representan una puntuación de satisfacción personal de 0 a 10.
