@@ -1,0 +1,202 @@
+---
+title: "PROBLEMAS RESUELTOS TD"
+author: "Carmen Puerto Moron"
+date: "`r Sys.Date()`"
+format:
+  typst:
+    fig-format: png
+  html: default
+---
+
+## Ejercicio 1
+
+Un departamento universitario debe decidir qué modalidad de examen aplicar en una asignatura. La efectividad de cada decisión dependerá del nivel de preparación del alumnado ese año.
+
+| **Estrategia (D)** | **E1 (Alumnos muy preparados)** | **E2 (Preparación media)** | **E3 (Preparación baja)** |
+|:----------------|:---------------------------:|:-----------------------:|:---------------------:|
+| **D1 – Examen tipo test** | 9 | 7 | 4 |
+| **D2 – Examen de desarrollo** | 8 | 6 | 5 |
+| **D3 – Examen mixto (test + desarrollo)** | 8 | 7 | 6 |
+| **D4 – Trabajo práctico en grupo** | 6 | 8 | 7 |
+
+Los valores representan la media esperada de calificaciones sobre 10.
+
+Resolución de dicho problema:
+
+```{r}
+source("teoriadecision_funciones_incertidumbre.R")
+
+# Tabla de resultados (notas esperadas)
+tabla1 = crea.tablaX(c(9,7,4,
+                       8,6,5,
+                       8,7,6,
+                       6,8,7),4,3)
+
+
+```
+
+**Apartado a)** Suponiendo que los valores son beneficios (mayor nota = mejor)
+
+```{r}
+# Pesimista
+p_pes = criterio.Wald(tabla1, T)
+p_pes$AlternativaOptima
+
+# Optimista
+p_opt = criterio.Optimista(tabla1, T)
+p_opt$AlternativaOptima
+
+# Hurwicz
+p_hur = criterio.Hurwicz(tabla1, T)
+p_hur$AlternativaOptima
+
+# Gráfico Hurwicz
+dibuja.criterio.Hurwicz(tabla1, favorable = TRUE)
+
+# Savage
+p_savage = criterio.Savage(tabla1, T)
+p_savage$AlternativaOptima
+
+# Laplace
+p_laplace = criterio.Laplace(tabla1, T)
+p_laplace$AlternativaOptima
+
+# Punto ideal
+p_puntoideal = criterio.PuntoIdeal(tabla1, T)
+p_puntoideal$AlternativaOptima
+
+# Todos los criterios
+#install.packages("tinytable")
+tinytex::reinstall_tinytex(repository = "illinois")
+tinytex::tlmgr_install("tabularray")
+library(tinytable)
+tt(criterio.Todos(tabla1, 0.5, favorable = FALSE), rownames = TRUE)
+
+``` 
+**Conclusión**
+
+La mayoría de los criterios (Wald, Hurwicz, Laplace y Punto Ideal) recomiendan la alternativa D3 (examen mixto), ya que es la opción más equilibrada frente a los diferentes niveles de preparación del alumnado.
+El criterio Optimista selecciona D1 (test), que ofrece la mayor nota posible si los alumnos están muy preparados, mientras que el criterio Pesimista destaca D3 por su estabilidad.
+
+En conclusión, D3 – examen mixto es la opción más razonable y robusta ante la incertidumbre.
+
+
+**Apartado b)** Suponiendo que los valores son “costes” (esfuerzo del profesor)
+
+```{r}
+
+# Pesimista
+p3c_pes = criterio.Wald(tabla1,F)
+p3c_pes$AlternativaOptima
+
+# Optimista
+p3c_opt = criterio.Optimista(tabla1,F)
+p3c_opt$AlternativaOptima
+
+# Hurwicz
+p3c_hur = criterio.Hurwicz(tabla1,F)
+p3c_hur$AlternativaOptima
+
+# Gráficos Hurwicz
+dibuja.criterio.Hurwicz(tabla1, favorable=FALSE)
+dibuja.criterio.Hurwicz_Intervalos(tabla1, favorable=FALSE)
+
+# Savage
+p3c_savage = criterio.Savage(tabla1,F)
+p3c_savage$AlternativaOptima
+
+# Laplace
+p3c_laplace = criterio.Laplace(tabla1,F)
+p3c_laplace$AlternativaOptima
+
+# Punto ideal
+p3c_puntoideal = criterio.PuntoIdeal(tabla1,F)
+p3c_puntoideal$AlternativaOptima
+
+# Todos los criterios
+tt(criterio.Todos(tabla1, 0.5, favorable = FALSE), rownames = TRUE)
+
+ 
+```
+
+**Conclusión**
+
+Si interpretamos los valores como costes (esfuerzo requerido), la mejor alternativa pasa a ser D1 (examen tipo test), pues implica menos esfuerzo para corregir y administrar.
+Por tanto, la decisión óptima dependerá del objetivo:
+
+- Si se busca maximizar rendimiento del alumnado, elegir D3.
+
+- Si se busca minimizar el esfuerzo docente, elegir D1.
+
+
+
+## EJERCICIO 2
+
+Una persona está planificando sus vacaciones de verano. Debe elegir entre tres destinos y sabe que el disfrute del viaje dependerá del clima durante esas fechas.
+
+| **Alternativa (D)** | **E1 (Clima soleado)** | **E2 (Clima variable)** | E3 **(Clima lluvioso)** |
+|:-----------------|:------------------:|:-------------------:|:-------------------:|
+| **D1 – Playa** | 9 | 6 | 2 |
+| **D2 – Ciudad cultural** | 7 | 8 | 5 |
+| **D3 – Turismo rural** | 6 | 7 | 8 |
+
+Los valores representan una puntuación de satisfacción personal de 0 a 10.
+
+Resolución de dicho problema:
+
+```{r}
+source("teoriadecision_funciones_incertidumbre.R")
+
+# Tabla de satisfacción
+tabla2 = crea.tablaX(c(9,6,2,
+                       7,8,5,
+                       6,7,8),3,3)
+```
+
+**Apartado a)**Suponiendo que los valores son beneficios (mayor satisfacción = mejor)
+
+```{r}
+# Pesimista
+p4_pes = criterio.Wald(tabla2,T)
+p4_pes$AlternativaOptima
+
+# Optimista
+p4_opt = criterio.Optimista(tabla2,T)
+p4_opt$AlternativaOptima
+
+# Hurwicz
+p4_hur = criterio.Hurwicz(tabla2,T)
+p4_hur$AlternativaOptima
+
+# Gráfico Hurwicz
+dibuja.criterio.Hurwicz(tabla2, favorable=T)
+
+# Savage
+p4_savage = criterio.Savage(tabla2,T)
+p4_savage$AlternativaOptima
+
+# Laplace
+p4_laplace = criterio.Laplace(tabla2,T)
+p4_laplace$AlternativaOptima
+
+# Punto ideal
+p4_puntoideal = criterio.PuntoIdeal(tabla2,T)
+p4_puntoideal$AlternativaOptima
+
+# Todos los criterios
+library(tinytable)
+tt(criterio.Todos(tabla2, 0.5, favorable = TRUE), rownames = TRUE)
+
+```
+
+**Conclusión**
+
+El análisis muestra que la mayoría de criterios (Wald, Laplace, Hurwicz y Punto Ideal) seleccionan D2 (Ciudad cultural), ya que ofrece satisfacción alta en casi todos los climas.
+El criterio Optimista elegiría D1 (Playa), porque proporciona la máxima puntuación posible (9) si el clima es perfecto.
+
+Por tanto, si la persona quiere una opción segura y equilibrada, el destino ideal sería una ciudad cultural (D2); si es optimista y confía en el buen tiempo, puede elegir D1 (Playa).
+
+
+
+
+
