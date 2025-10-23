@@ -10,7 +10,7 @@ El objetivo de este proyecto es practicar el uso de Git y GitHub, incluyendo la 
   
 ## Autor
 **[Carmen Puerto Moron]**  
-Usuario de GitHub: 
+Usuario de GitHub: https://github.com/cpuertomoron/trabajo01indtd2024.git
 
 ## Fecha
 Octubre de 2025
